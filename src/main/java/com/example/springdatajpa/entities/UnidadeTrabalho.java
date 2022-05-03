@@ -16,17 +16,15 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "tb_cargo")
-public class Cargo implements Serializable {
-
+@Table(name = "tb_unidade_trabalho")
+public class UnidadeTrabalho implements Serializable {
     @Serial
-    private static final long serialVersionUID = 5629851324697331039L;
+    private static final long serialVersionUID = -8058317873380213241L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo")
-    private List<Funcionario> funcionarios = new ArrayList<>();
+
+    @OneToMany(mappedBy = "unidadeTrabalho")
+    private List<UnidadeFuncionario> unidadeFuncionario = new ArrayList<>();
 }

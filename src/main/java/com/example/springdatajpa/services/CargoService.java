@@ -34,4 +34,5 @@ public class CargoService {
     public void delete(Cargo entity) {
         cargoRepository.delete(entity);
     }
+
 }

@@ -7,7 +7,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,17 +15,18 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "tb_cargo")
-public class Cargo implements Serializable {
-
+@Table(name = "tb_funcionario")
+public class Funcionario implements Serializable {
     @Serial
-    private static final long serialVersionUID = 5629851324697331039L;
+    private static final long serialVersionUID = 3002557075007411584L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo")
-    private List<Funcionario> funcionarios = new ArrayList<>();
+
+    @ManyToOne
+    private Cargo cargo;
+
+    @OneToMany(mappedBy = "funcionario")
+    private List<UnidadeFuncionario> unidadeFuncionario;
 }
