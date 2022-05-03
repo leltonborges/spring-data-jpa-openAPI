@@ -1,0 +1,20 @@
+server:
+  port: ${PORT:8089}
+
+spring:
+  application:
+    name: study-jpa
+  profiles:
+    active: ${PROFILE:dev}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/${DB_NAME:alura.study-jpa}
+    username: ${DB_USER:study}
+    password: ${DB_PASS:123}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      format-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
