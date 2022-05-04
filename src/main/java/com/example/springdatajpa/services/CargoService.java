@@ -27,8 +27,8 @@ public class CargoService {
         return cargoRepository.save(entity);
     }
 
-    public Optional<Cargo> findById(Long aLong) {
-        return cargoRepository.findById(aLong);
+    public Cargo findById(Long aLong) {
+        return cargoRepository.findById(aLong).get();
     }
 
     public void delete(Cargo entity) {

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/cargo")
@@ -26,13 +28,9 @@ public class CargoResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cargo> findByID(@PathVariable Long id){
-        Cargo cargo = this.cargoService.findById(id).get();
-        cargo.add(
-                WebMvcLinkBuilder.linkTo(CargoResource.class)
-                        .slash(id)
-                        .withSelfRel()
-        );
+    public ResponseEntity<Cargo> findByID( @PathVariable Long id){
+        Cargo cargo = this.cargoService.findById(id);
+        cargo.add(linkTo(methodOn(CargoResource.class).findByID(id)).withSelfRel());
         return ResponseEntity.ok(cargo);
     }
 }
