@@ -4,6 +4,7 @@ import com.example.springdatajpa.entities.Cargo;
 import com.example.springdatajpa.services.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.MediaType;
@@ -30,7 +31,10 @@ public class CargoResource {
     @GetMapping("/{id}")
     public ResponseEntity<Cargo> findByID( @PathVariable Long id){
         Cargo cargo = this.cargoService.findById(id);
+        cargo.add(linkTo(methodOn(CargoResource.class).findAll()).withRel(IanaLinkRelations.COLLECTION));
+
         cargo.add(linkTo(methodOn(CargoResource.class).findByID(id)).withSelfRel());
+
         return ResponseEntity.ok(cargo);
     }
 }
