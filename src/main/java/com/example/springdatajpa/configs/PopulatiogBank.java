@@ -23,7 +23,7 @@ public class PopulatiogBank implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        this.saveCargos();
+        this.saveCargos();
         this.getFuncionarios();
     }
 

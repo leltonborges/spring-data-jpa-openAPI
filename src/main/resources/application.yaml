@@ -1,7 +1,7 @@
 server:
   port: ${PORT:8089}
   servlet:
-    context-path: /cargo
+    context-path: /v1/
 
 spring:
   application:
@@ -22,6 +22,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  mvc:
-    servlet:
-      path: /v1

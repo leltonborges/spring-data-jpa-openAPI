@@ -4,6 +4,7 @@ import com.example.springdatajpa.entities.Cargo;
 import com.example.springdatajpa.services.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class CargoResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<Cargo> findByID(@PathVariable Long id){
-        return ResponseEntity.ok(this.cargoService.findById(id).get());
+        Cargo cargo = this.cargoService.findById(id).get();
+        cargo.add(Link.of("http://localhost:8089/v1/cargo/1"));
+        return ResponseEntity.ok(cargo);
     }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_cargo")
-public class Cargo implements Serializable {
+public class Cargo extends RepresentationModel<Cargo> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 5629851324697331039L;
