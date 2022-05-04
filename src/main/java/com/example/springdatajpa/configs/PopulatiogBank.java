@@ -1,6 +1,8 @@
 package com.example.springdatajpa.configs;
 
 import com.example.springdatajpa.entities.Cargo;
+import com.example.springdatajpa.repositories.FuncionarioRepository;
+import com.example.springdatajpa.repositories.UnidadeFuncionarioRepository;
 import com.example.springdatajpa.services.CargoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,13 @@ import java.util.Collections;
 public class PopulatiogBank implements CommandLineRunner {
 
     private final CargoService cargoService;
+    private final FuncionarioRepository funcionarioRepository;
+    private final UnidadeFuncionarioRepository unidadeFuncionarioRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        this.saveCargos();
+//        this.saveCargos();
+        this.getFuncionarios();
     }
 
     @Transactional
@@ -29,5 +34,10 @@ public class PopulatiogBank implements CommandLineRunner {
 
         this.cargoService.save(c1);
         this.cargoService.save(c2);
+    }
+
+    void getFuncionarios(){
+        funcionarioRepository.findByName("joão");
+        unidadeFuncionarioRepository.findByFuncionario_Name("aba");
     }
 }

@@ -1,5 +1,7 @@
 server:
   port: ${PORT:8089}
+  servlet:
+    context-path: /cargo
 
 spring:
   application:
@@ -14,9 +16,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+  mvc:
+    servlet:
+      path: /v1
