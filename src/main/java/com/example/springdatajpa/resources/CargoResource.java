@@ -31,9 +31,9 @@ public class CargoResource {
     @GetMapping("/{id}")
     public ResponseEntity<Cargo> findByID( @PathVariable Long id){
         Cargo cargo = this.cargoService.findById(id);
-        cargo.add(linkTo(methodOn(CargoResource.class).findAll()).withRel(IanaLinkRelations.COLLECTION));
-
+        
         cargo.add(linkTo(methodOn(CargoResource.class).findByID(id)).withSelfRel());
+        cargo.add(linkTo(methodOn(CargoResource.class).findAll()).withRel("all"));
 
         return ResponseEntity.ok(cargo);
     }
