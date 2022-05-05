@@ -1,5 +1,6 @@
 package com.example.springdatajpa.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,17 @@ public class Cargo extends RepresentationModel<Cargo> implements Serializable {
     private Long id;
     private String name;
     private String description;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo")
     private List<Funcionario> funcionarios = new ArrayList<>();
+
+    public Cargo(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public void addFuncionario(final Funcionario funcionario){
+        funcionario.setCargo(this);
+        this.getFuncionarios().add(funcionario);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.springdatajpa.resources;
 
 import com.example.springdatajpa.entities.Cargo;
+import com.example.springdatajpa.entities.Funcionario;
 import com.example.springdatajpa.services.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -31,9 +33,13 @@ public class CargoResource {
     @GetMapping("/{id}")
     public ResponseEntity<Cargo> findByID( @PathVariable Long id){
         Cargo cargo = this.cargoService.findById(id);
-        
+
         cargo.add(linkTo(methodOn(CargoResource.class).findByID(id)).withSelfRel());
         cargo.add(linkTo(methodOn(CargoResource.class).findAll()).withRel("all"));
+        List<Funcionario> funcionarios = cargo.getFuncionarios().stream()
+                .map(f -> f.add(linkTo(methodOn(FuncionarioResource.class)
+                        .findByID(f.getId())).withSelfRel())).collect(Collectors.toList());
+        cargo.setFuncionarios(funcionarios);
 
         return ResponseEntity.ok(cargo);
     }
