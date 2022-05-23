@@ -22,3 +22,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+
+#Config swagger
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: docs.html
+
